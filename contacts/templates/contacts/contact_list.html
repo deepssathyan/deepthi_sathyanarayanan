@@ -1,0 +1,50 @@
+<html>
+    <body style="background-color:lightyellow;">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact App</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'contacts/css/styles.css' %}">
+
+    </head>
+    <body>
+        <div class = "container">
+            <header>
+                <h1 class="header">Contact Management</h1>
+            </header>
+            <div class="button-container">
+                <button onClick="location.href = 'http://127.0.0.1:8000/contacts/create';">
+                    Create a New Contact
+                </button>
+            </div>
+
+        
+        <table>
+            <thead>
+                <th>Contact Name</th>
+                <th>Email</th>
+                <th>Created Time</th>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+            <tr>
+                <td>
+                    <a href="{% url 'contact_edit' pk=contact.pk %}" class="edit-icon">&#9998;</a>
+                    <a href="{% url 'contact_delete' pk=contact.pk %}" onclick="return confirm('Are you sure you want to delete?');" class="delete-icon">&#10006;</a>
+                    <a href="{% url 'contact_detail' pk=contact.pk %}">{{ contact.name }}</a>
+                </td>
+                <td><a href="{% url 'contact_detail' pk=contact.pk %}">{{ contact.email }}</a></td>
+                <td><a href="{% url 'contact_detail' pk=contact.pk %}">{{ contact.created_at }}</a></td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <footer>
+            <span>
+                &copy; Created by Deepthi Sathyanarayan
+            </span>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,9 @@
+<!-- contacts/templates/contacts/contact_edit.html -->
+<body style="background-color:lightyellow;">
+
+<h1>Edit Contact</h1>
+<form method="POST" class="contact-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+</form>
