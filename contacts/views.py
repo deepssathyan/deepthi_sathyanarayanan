@@ -33,3 +33,9 @@ def contact_edit(request, pk):
         form = ContactForm(instance=contact)
     return render(request, 'contacts/contact_edit.html', {'form': form})
 
+def contact_delete(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    contact.delete()
+    return redirect('contact_list')
+
+
