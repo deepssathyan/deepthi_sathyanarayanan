@@ -21,3 +21,15 @@ def contact_new(request):
         form = ContactForm()
     return render(request, 'contacts/contact_edit.html', {'form': form})
 
+def contact_edit(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    if request.method == "POST":
+        form = ContactForm(request.POST, instance=contact)
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.save()
+            return redirect('contact_detail', pk=contact.pk)
+    else:
+        form = ContactForm(instance=contact)
+    return render(request, 'contacts/contact_edit.html', {'form': form})
+
